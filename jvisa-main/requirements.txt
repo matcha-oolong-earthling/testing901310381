@@ -1,0 +1,3 @@
+# fhir_mapper has no hard dependencies beyond the Python stdlib.
+# Pandas is optional (for DataFrame support).
+pandas>=1.5
