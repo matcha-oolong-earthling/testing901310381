@@ -7,6 +7,12 @@ name = "jvisa"
 version = "0.1.0"
 description = "Team J-VISA proposes SepsisAlert, an AI-powered, SMART on FHIR-enabled sepsis early warning application."
 requires-python = ">=3.10"
+dependencies = [
+    "pandas>=1.5",
+    "scikit-learn>=1.2",
+    "matplotlib>=3.6",
+    "streamlit>=1.30",
+]
 
 [tool.setuptools.packages.find]
 include = ["jvisa*"]

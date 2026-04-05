@@ -1,3 +1,4 @@
-# fhir_mapper has no hard dependencies beyond the Python stdlib.
-# Pandas is optional (for DataFrame support).
 pandas>=1.5
+scikit-learn>=1.2
+matplotlib>=3.6
+streamlit>=1.30
