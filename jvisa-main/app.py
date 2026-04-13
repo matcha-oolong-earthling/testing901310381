@@ -113,17 +113,31 @@ with tab_overview:
 
     st.subheader("Pipeline Architecture")
     st.code(
-        "CSV (MIMIC-IV-ICU)\n"
-        "  |  jvisa.fhir_mapper\n"
-        "  v\n"
+        "Raw Data (MIMIC-IV-ICU CSVs)\n"
+        "       │\n"
+        "       ▼  [ jvisa.fhir_mapper ] - Converts tabular data into FHIR Resources\n"
+        "       │    (Patient, Encounter, Observation, Condition, Procedure)\n"
+        "       │\n"
         "FHIR R4 Bundles (bundles.ndjson / bundles.json)\n"
-        "  |  jvisa.csv_mapper\n"
-        "  v\n"
-        "pandas DataFrame (imputed)\n"
-        "  |  jvisa.model (Random Forest)\n"
-        "  v\n"
-        "Sepsis Risk Prediction",
-        language=None,
+        "       │\n"
+        "       ▼  [ jvisa.csv_mapper ] - Parses FHIR Bundles back into Tabular Format\n"
+        "       │    (Extracts features, flattens observations)\n"
+        "       │\n"
+        "Raw pandas DataFrame\n"
+        "       │\n"
+        "       ▼  [ Imputation ] - Fills missing numeric values (median/mean/zero)\n"
+        "       │\n"
+        "Clean pandas DataFrame\n"
+        "       │\n"
+        "       ├──► [ jvisa.model / Random Forest ] - Training & Evaluation\n"
+        "       │      └──► Metrics (Accuracy, F1, ROC AUC)\n"
+        "       │\n"
+        "       ▼\n"
+        "Inference / API (FastAPI) & UI (Streamlit)\n"
+        "       │\n"
+        "       ├──► Sepsis Risk Prediction (Probability %)\n"
+        "       └──► SHAP TreeExplainer (Feature Importance)",
+        language="text",
     )
 
     st.subheader("Feature Categories")
